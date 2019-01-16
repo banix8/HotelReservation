@@ -12,21 +12,29 @@ import javax.swing.ImageIcon;
 public class HotelRoomReservation extends JFrame implements ActionListener {
       
       	   //declaring Components
+      	   
+      	   
       	   JLabel RPreview, RBooking,Totalcost, Cash, LStatus,Change_, lblx, lblBG,lchkIN,lchkOut,lName,lPhone;
+      	   
       	   JButton bAdd, bClear, Reserve,Rm1,Rm2,Rm3,Rm4,Rm5,Rm6,Rm7,Rm8,Rm9,Rm10,Rm11,Rm12,Rm13,Rm14,Rm15,Rm16,Rm17,Rm18,Rm19,Rm20;
+      	   
       	   JTextField txtN1, txtN2, txtR, RStatus, txtchkIN,txtchkOut,txtName,txtPhone;
+      	   
       	   JTextArea RDetail1, RRate, Binfo;
-      	   ImageIcon pic1 = new ImageIcon("D:/Documents/HotelRoomReservation/img/bg.jpg");
+      	   
+      	   ImageIcon pic1 = new ImageIcon("C:/Users/Darwin Delvo/Downloads/Compressed/HotelReservation-master/img/bg.jpg");
       	   Image image1 = pic1.getImage();
       	   Image scaled1 = image1.getScaledInstance(1366,710,java.awt.Image.SCALE_SMOOTH);
       	   ImageIcon bg1 = new ImageIcon(scaled1);
       	   
       	  // Icon PPreview = new ImageIcon("D:/Documents/HotelRmx_Reservation/img/Rm21.jpg");
-      	   String imgLink = "D:/Documents/HotelRoomReservation/img/";
+      	   String imgLink = "C:/Users/Darwin Delvo/Downloads/Compressed/HotelReservation-master/img/";
+           
+           String imgLink1 = "C:/Users/Darwin Delvo/Downloads/Compressed/HotelReservation-master/RPreview/";
            Icon logo = new ImageIcon(imgLink + "logo.png");
       	   Icon PPreview = new ImageIcon(imgLink + "Rm21.jpg");
-      	   Icon Rm01 = new ImageIcon(imgLink + "Rmx_2.jpg");
-      	   Icon Rm02 = new ImageIcon(imgLink + "Rmx_1.jpg");
+      	   Icon Rm01 = new ImageIcon(imgLink + "Rmx_1.jpg");
+      	   Icon Rm02 = new ImageIcon(imgLink + "Rmx_2.jpg");
       	   Icon Rm03 = new ImageIcon(imgLink + "Rmx_3.jpg");
       	   Icon Rm04 = new ImageIcon(imgLink + "Rmx_4.jpg");
       	   Icon Rm05 = new ImageIcon(imgLink + "Rmx_5.jpg");
@@ -259,10 +267,12 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	 	Rm6.setBounds(382,562,70,37);
       	 	Rm6.setBackground(Color.white);
       	 	add(Rm7);
-      	 	Rm7.setBounds(457,562,70,37);
+      	 	Rm7.setBounds(759,520,70,37);
       	 	Rm7.setBackground(Color.white);
+      	 	
+      	 	
       	 	add(Rm8);
-      	 	Rm8.setBounds(532,562,70,37);
+      	 	Rm8.setBounds(834,520,70,37);
       	 	Rm8.setBackground(Color.white);
       	 	
       	 	add(Rm9);
@@ -272,10 +282,11 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	 	Rm10.setBounds(684,520,70,37);
       	 	Rm10.setBackground(Color.white);      	 	
       	 	add(Rm11);
-      	 	Rm11.setBounds(759,520,70,37);
+      	 	Rm11.setBounds(457,562,70,37);
       	 	Rm11.setBackground(Color.white);
       	 	add(Rm12);
-      	 	Rm12.setBounds(834,520,70,37);
+      	 	
+      	 	Rm12.setBounds(532,562,70,37);
       	 	Rm12.setBackground(Color.white);
       	 	
       	 	add(Rm13);
@@ -306,13 +317,100 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	 	Rm20.setBackground(Color.white);
       	 	
       		add(lblx);
+       	    
+       	    
        	    bAdd.addActionListener(this);
       	    bClear.addActionListener(this);
-      	
+      	    //ImageIcon Change
+      	    Rm1.addActionListener(this);
+      		Rm2.addActionListener(this);
+      		Rm3.addActionListener(this);
+      		Rm4.addActionListener(this);
+      		Rm5.addActionListener(this);
+      		Rm6.addActionListener(this);
+      		Rm7.addActionListener(this);
+      		Rm8.addActionListener(this);
+      		Rm9.addActionListener(this);
+      		Rm10.addActionListener(this);
+      		Rm11.addActionListener(this);
+      		Rm12.addActionListener(this);
+      		Rm13.addActionListener(this);
+      		Rm14.addActionListener(this);
+      		Rm15.addActionListener(this);
+      		Rm16.addActionListener(this);
+      		Rm17.addActionListener(this);
+      		Rm18.addActionListener(this);
+      		Rm19.addActionListener(this);
+      		Rm20.addActionListener(this);
+      		//RPreview.addActionListener(this);
       	}//end of contructor
     //Event Handlers
     public void actionPerformed (ActionEvent e){
     	
+    	
+    	//Changing the ImageIcon when Button is Press
+	    	if (e.getSource() == Rm1) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 + "Rm1.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm2) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 + "Rm2.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm3) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm3.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm4) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm4.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm5) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm5.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm6) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 + "Rm6.jpg"));	
+	    	}		
+	    	else if (e.getSource() == Rm7) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm7.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm8) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm8.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm9) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm9.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm10) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm10.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm11) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm11.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm12) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm12.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm13) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm13.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm14) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm14.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm15) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm15.jpg"));	
+	    	}else if (e.getSource() == Rm16) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm16.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm17) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm17.jpg"));	
+	    	}			
+	    	else if (e.getSource() == Rm18) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm18.jpg"));	
+	    	}
+	    	else if (e.getSource() == Rm19) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm19.jpg"));	
+	    	}	
+	    	else if (e.getSource() == Rm20) {
+	    	RPreview.setIcon(new ImageIcon(imgLink1 + "Rm20.jpg"));	
+	    	}
+	          	
+		    
+		    	
     	   if (e.getSource() == bAdd){
     	   		int a,b,sum;
     	   		
@@ -327,8 +425,15 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
     	   		txtN1.setText("");
     	   		txtN2.setText("");
     	   		txtR.setText("");
-    	   	}	
-    	}//end of Event Handler  	
+    	   		txtchkIN.setText("");
+    	   		txtchkOut.setText("");
+    	   		txtName.setText("");
+    	   		txtPhone.setText("");
+    	   		
+    	   	}//end of Event Handler
+    	 		
+    	}
+    	  	
       
     public static void main(String[] args) {
 			HotelRoomReservation  BG = new HotelRoomReservation();
