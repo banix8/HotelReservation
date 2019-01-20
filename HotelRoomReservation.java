@@ -12,44 +12,30 @@ import javax.swing.ImageIcon;
 public class HotelRoomReservation extends JFrame implements ActionListener {
       
       	   //declaring Components
-<<<<<<< HEAD
-      	   JLabel RPreview, RBooking,Totalcost, Cash, Change_, lblx, lblBG,lchkIN,lchkOut,lName,lPhone;
-      	   JButton bPay, bClear, bNewC, Reserve,Rm1,Rm2,Rm3,Rm4,Rm5,Rm6,Rm7,Rm8,Rm9,Rm10,Rm11,Rm12,Rm13,Rm14,Rm15,Rm16,Rm17,Rm18,Rm19,Rm20;
-      	   JTextField txtN1, txtN2, txtR, RStatus, txtchkIN,txtchkOut,txtName,txtPhone;
-      	   JTextArea RDetail1, RRate, Binfo, LStatus;
-      	   ImageIcon pic1 = new ImageIcon("D:/Documents/HotelRoomReservation/img/bg.jpg");
-=======
-      	   
-      	   
-      	   JLabel RPreview, RBooking,Totalcost, Cash, LStatus,Change_, lblx, lblBG,lchkIN,lchkOut,lName,lPhone;
-      	   
-      	   JButton bAdd, bClear, Reserve,Rm1,Rm2,Rm3,Rm4,Rm5,Rm6,Rm7,Rm8,Rm9,Rm10,Rm11,Rm12,Rm13,Rm14,Rm15,Rm16,Rm17,Rm18,Rm19,Rm20;
-      	   
-      	   JTextField txtN1, txtN2, txtR, RStatus, txtchkIN,txtchkOut,txtName,txtPhone;
-      	   
-      	   JTextArea RDetail1, RRate, Binfo;
-      	   
-      	   ImageIcon pic1 = new ImageIcon("C:/Users/Darwin Delvo/Downloads/Compressed/HotelReservation-master/img/bg.jpg");
->>>>>>> 19728ff780cce2d04a8268fc814f732f6279b7ba
+      	   JLabel RPreview, RBooking,Totalcost, Cash, TWarning, lblx, lblBG,lchkIN,lchkOut,lName,lPhone,YouBooked;
+           JTextArea RTypeStudio,RTypeDeLuxe,RTypePremier,RTypeSuperior; 
+           JLabel lR1,lR2,lR3,lR4,lR5,lR6,lR7,lR8,lR9,lR10,lR11,lR12,lR13,lR14,lR15,lR16,lR17,lR18,lR19,lR20;
+      	   JButton bPay, bClear, bNewC, Reserve,RCancel;
+           JButton Rm1,Rm2,Rm3,Rm4,Rm5,Rm6,Rm7,Rm8,Rm9,Rm10,Rm11,Rm12,Rm13,Rm14,Rm15,Rm16,Rm17,Rm18,Rm19,Rm20;
+      	   JTextField LTotalcost, LCash, LWarn, RStatus, txtchkIN,txtchkOut,txtName,txtPhone;
+      	   JTextArea RDetail1, RRate, Binfo, LStatus, OReminders;
+      	   String imgLink = "D:/Documents/HotelRoomReservation/img/";
+      	   String previewImg = imgLink + "Preview.jpg";
+      	   ImageIcon pic1 = new ImageIcon(imgLink + "bg4.jpg");
       	   Image image1 = pic1.getImage();
       	   Image scaled1 = image1.getScaledInstance(1366,710,java.awt.Image.SCALE_SMOOTH);
       	   ImageIcon bg1 = new ImageIcon(scaled1);
-      	   String imgLink = "D:/Documents/HotelRoomReservation/img/";
-      	   String previewImg = imgLink + "Rm21.jpg";
-      	   
-      	  // Icon PPreview = new ImageIcon("D:/Documents/HotelRmx_Reservation/img/Rm21.jpg");
-<<<<<<< HEAD
+           int RoomNum,avlRooms = 20;
+           Boolean RoomStatus = false;
+    	   String RoomName,RInfo="",RoomState = "";
+    	   Double RoomCost = 0.00;
+    	   Double RTotal = 0.00;
+    	   
       	   
            Icon logo = new ImageIcon(imgLink + "logo.png");
       	   Icon PPreview = new ImageIcon(previewImg);
-=======
-      	   String imgLink = "C:/Users/Darwin Delvo/Downloads/Compressed/HotelReservation-master/img/";
-           
-           String imgLink1 = "C:/Users/Darwin Delvo/Downloads/Compressed/HotelReservation-master/RPreview/";
-           Icon logo = new ImageIcon(imgLink + "logo.png");
-      	   Icon PPreview = new ImageIcon(imgLink + "Rm21.jpg");
->>>>>>> 19728ff780cce2d04a8268fc814f732f6279b7ba
-      	   Icon Rm01 = new ImageIcon(imgLink + "Rmx_1.jpg");
+
+           Icon Rm01 = new ImageIcon(imgLink + "Rmx_1.jpg");
       	   Icon Rm02 = new ImageIcon(imgLink + "Rmx_2.jpg");
       	   Icon Rm03 = new ImageIcon(imgLink + "Rmx_3.jpg");
       	   Icon Rm04 = new ImageIcon(imgLink + "Rmx_4.jpg");
@@ -69,59 +55,104 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	   Icon Rm018 = new ImageIcon(imgLink + "Rmx_18.jpg");
       	   Icon Rm019 = new ImageIcon(imgLink + "Rmx_19.jpg");
       	   Icon Rm020 = new ImageIcon(imgLink + "Rmx_20.jpg");
-   	  	
-      	 public HotelRoomReservation() {
+   	 
+      public HotelRoomReservation() {
       	 	
       	 	///Contruction/Instantiate
        	 	setSize(1366,750);
        	 	setLocation(0,0);
       	 	setVisible(true);
-      	 	setTitle("Hotel Reservation");
+      	 	setTitle("Hotel HotelRoomReservation");
       	 	setResizable(false);
+      	 	
       	 	
       	 	//set background for JFrame
       	 	Container C = getContentPane();
       	 	C.setBackground(new Color(226,226,226));
       	 	
       	 	RPreview = new JLabel(PPreview);
-       	 	RDetail1 = new JTextArea("Room Amenities\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate = new JTextArea("Room Rate:\n\nP500.00 per night");
-      	 	Binfo = new JTextArea("You booked:\n VIP room = P1000.00");
-      	 	LStatus = new JTextArea("VACANT");
-      	 //	RStatus = new JTextArea();
-      	 	
-      	 	RDetail1.setEditable(false);
+       	 	RDetail1 = new JTextArea("Hotel Amenities:\n* Comfortable & Luxuries Rooms\n* Air Condition with 42 Cable TV\n* 24/7 Active Security\n* Clean BathRoom & Sink");
+       	 	RDetail1.setEditable(false);
+      	 	RRate = new JTextArea("Room Rates:\nP500.00 to P5000.00");
       	 	RRate.setEditable(false);
-      	 	Binfo.setEditable(false);
+      	 	LStatus = new JTextArea("Room Status:\nVACANT rooms = "+ avlRooms);
+      	 	LStatus.setEditable(false);
+      	 	
       	 	Reserve = new JButton("Reserve");
+      	 	RCancel = new JButton("Cancel");
+      	 	
+      	 	YouBooked = new JLabel("Choose now your favorite room/s...");
+      	 	Binfo = new JTextArea();
+      	 	Binfo.setEditable(false);
+      	 	OReminders = new JTextArea("How to Book a room:\n* Click the room you liked below.\n* Click Reserve to reserve.\n* Click Cancel to cancel.\n* Please fill your details below.\n* We only accept exact amount");
+      	 	OReminders.setEditable(false);
       	 	
       	 	RBooking = new JLabel("Booking Form");
-      	 	
-      	 	
       	 	Totalcost = new JLabel("Total Cost");
       	 	Cash = new JLabel("Cash");
       	 	lchkIN = new JLabel("Check IN:");
+      	 	txtchkIN = new JTextField(20);
+      	 	txtchkIN.setToolTipText("What day you will check-in?");
       	 	lchkOut = new JLabel("Check OUT:");
+      	 	txtchkOut = new JTextField(20);
+      	 	txtchkOut.setToolTipText("What day you will check-out?");
       	 	lName = new JLabel("Name:");
+      	 	txtName = new JTextField(20);
+      	 	txtName.setToolTipText("Please enter complete name.");
       	 	lPhone = new JLabel("Contact#:");
-      	 	Change_ = new JLabel("Change");
-      	 	lblBG = new JLabel(bg1);
+      	 	txtPhone = new JTextField(20);
+      	 	txtPhone.setToolTipText("Please enter valid phone#");
+      	 	//TWarning = new JLabel("Change");
+      	 	LWarn = new JTextField(20);
+      	 	LWarn.setEditable(false);
+      	 	
       	 	bPay = new JButton("Pay");
       	 	bClear = new JButton("Clear");
       	 	bNewC = new JButton("New Client");
-      	 	txtN1 = new JTextField(20);
-      	 	txtN2 = new JTextField(20);
-      	 	txtR = new JTextField(20);
+      	 	LTotalcost = new JTextField(20);
+      	 	LTotalcost.setToolTipText("Whole Total Cost to pay.");
+      	 	LTotalcost.setEditable(false);
+      	 	LCash = new JTextField(20);
+      	 	LCash.setToolTipText("Please pay only exact cash");
       	 	
-      	 	txtchkIN = new JTextField(20);
-      	 	txtchkOut = new JTextField(20);
-      	 	txtName = new JTextField(20);
-      	 	txtPhone = new JTextField(20);
-      	 	
-      	 	
+      	 	lblBG = new JLabel(bg1);
       	 	lblx= new JLabel("");
-      	 	
+                
+                
+            RTypeStudio= new JTextArea("STUDIO\nROOMS");
+            RTypeStudio.setEditable(false);
+            lR1= new JLabel("Rm: 1");
+  	 		lR2= new JLabel("Rm: 2");
+            lR3= new JLabel("Rm: 3");
+            lR4= new JLabel("Rm: 4");
+            lR5= new JLabel("Rm: 5");
+            
+            RTypeDeLuxe= new JTextArea("DELUXE\nROOMS");
+            RTypeDeLuxe.setEditable(false);
+            lR6= new JLabel("Rm: 6");
+            lR7= new JLabel("Rm: 7");
+            lR8= new JLabel("Rm: 8");
+            lR9= new JLabel("Rm: 9");
+            lR10= new JLabel("Rm: 10");
+            
+            RTypePremier= new JTextArea("PREMIER\nROOMS");
+            RTypePremier.setEditable(false);
+            lR11= new JLabel("Rm: 11");
+            lR12= new JLabel("Rm: 12");
+            lR13= new JLabel("Rm: 13");
+            lR14= new JLabel("Rm: 14");
+            lR15= new JLabel("Rm: 15");
+            
+            RTypeSuperior= new JTextArea("SUPERIOR\nROOMS");
+            RTypeSuperior.setEditable(false);
+            lR16= new JLabel("Rm: 16");
+            lR17= new JLabel("Rm: 17");
+            lR18= new JLabel("Rm: 18");
+            lR19= new JLabel("Rm: 19");
+            lR20= new JLabel("Rm: 20");
+                
       	 	Rm1 = new JButton(Rm01);
+      	 		Rm1.setToolTipText("Room 1: Amenities = \n Gtlkdf");
       	 	Rm2 = new JButton(Rm02);
       	 	Rm3 = new JButton(Rm03);
       	 	Rm4 = new JButton(Rm04);
@@ -152,192 +183,375 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	 	RDetail1.setBackground(Color.black);
       	 	RDetail1.setFont(new Font("Serif", Font.PLAIN, 12));
       	 	RDetail1.setForeground(Color.white);
-      	 	
-      	 	add(RRate);
-      	 	RRate.setBounds(514,358,140,88);
-      	 	RRate.setBackground(Color.black);
-      	 	RRate.setFont(new Font("Serif", Font.PLAIN, 18));
-      	 	RRate.setForeground(Color.white);
-      	 	
+                
       	 	add(LStatus);
-      	 	LStatus.setBounds(680,370,100,40);
+      	 	LStatus.setBounds(514,358,140,44);
       	 	LStatus.setBackground(Color.black);
-      	 	LStatus.setFont(new Font("Serif", Font.PLAIN, 20));
+      	 	LStatus.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	LStatus.setForeground(Color.white);
-          	 	
+                
+      	 	add(RRate);
+      	 	RRate.setBounds(514,402,140,44);
+      	 	RRate.setBackground(Color.black);
+      	 	RRate.setFont(new Font("Serif", Font.PLAIN, 14));
+      	 	RRate.setForeground(Color.white);
+      	 	        	 	
       	 	add(Reserve);
-      	 	Reserve.setBounds(680,410,100,30);
+      	 	Reserve.setBounds(685,365,100,30);
       	 	
+      	 	add(RCancel);
+      	 	RCancel.setBounds(685,405,100,30);
       	 	
-      	 	add(RBooking);
-      	 	RBooking.setBounds(870,98,160,20);
-      	 	RBooking.setBackground(Color.black);
-      	 	RBooking.setFont(new Font("Serif", Font.PLAIN, 18));
-      	 	RBooking.setForeground(Color.white);
-      	    RBooking.setOpaque(true);
-      	 	
+      	 	add(YouBooked);
+      	 	YouBooked.setBounds(820,100,220,20);
+      	 	YouBooked.setBackground(Color.black);
+      	 	YouBooked.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	YouBooked.setForeground(Color.white);
+
       	 	add(Binfo);
-      	 	Binfo.setBounds(820,120,220,100);
+      	 	Binfo.setBounds(820,120,220,180);
       	 	Binfo.setBackground(Color.black);
       	 	Binfo.setFont(new Font("Serif", Font.PLAIN, 12));
       	 	Binfo.setForeground(Color.white);
       	 	
+      	 	add(OReminders);
+      	 	OReminders.setBounds(820,305,220,130);
+      	 	OReminders.setBackground(Color.black);
+      	 	OReminders.setFont(new Font("Serif", Font.PLAIN, 14));
+      	 	OReminders.setForeground(Color.white);
+            OReminders.setOpaque(true);
+      	    
+      	 	add(txtchkIN);
+      	 	txtchkIN.setBounds(900,500,140,20);
+      	 	
+      	 	
       	 	add(lchkIN);
-      	 	lchkIN.setBounds(820,235,80,20);
+      	 	lchkIN.setBounds(820,500,80,20);
       	 	lchkIN.setBackground(Color.black);
       	 	lchkIN.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	lchkIN.setForeground(Color.white);
-      	    lchkIN.setOpaque(true);
+            lchkIN.setOpaque(true);
       	    
       	 	add(txtchkIN);
-      	 	txtchkIN.setBounds(900,235,140,20);
+      	 	txtchkIN.setBounds(900,500,140,20);
       	 	
       	 	add(lchkOut);
-      	 	lchkOut.setBounds(820,260,80,20);
+      	 	lchkOut.setBounds(820,525,80,20);
       	 	lchkOut.setBackground(Color.black);
       	 	lchkOut.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	lchkOut.setForeground(Color.white);
-      	    lchkOut.setOpaque(true);
+            lchkOut.setOpaque(true);
       	    
       	 	add(txtchkOut);
-      	 	txtchkOut.setBounds(900,260,140,20);
+      	 	txtchkOut.setBounds(900,525,140,20);
       	 	
       	 	add(lName);
-      	 	lName.setBounds(820,285,80,20);
+      	 	lName.setBounds(820,550,80,20);
       	 	lName.setBackground(Color.black);
       	 	lName.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	lName.setForeground(Color.white);
-      	    lName.setOpaque(true);
-      	    
+            lName.setOpaque(true);
+            
+         
       	 	add(txtName);
-      	 	txtName.setBounds(900,285,140,20);
+      	 	txtName.setBounds(900,550,140,20);
       	 	
       	 	add(lPhone);
-      	 	lPhone.setBounds(820,310,80,20);
+      	 	lPhone.setBounds(820,575,80,20);
       	 	lPhone.setBackground(Color.black);
       	 	lPhone.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	lPhone.setForeground(Color.white);
-      	    lPhone.setOpaque(true);
+            lPhone.setOpaque(true);
       	    
       	 	add(txtPhone);
-      	 	txtPhone.setBounds(900,310,140,20);
+      	 	txtPhone.setBounds(900,575,140,20);
       	 	
       	 	add(Totalcost);
-      	 	Totalcost.setBounds(820,335,80,20);
+      	 	Totalcost.setBounds(820,600,80,20);
       	 	Totalcost.setBackground(Color.black);
       	 	Totalcost.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	Totalcost.setForeground(Color.white);
-      	    Totalcost.setOpaque(true);
+            Totalcost.setOpaque(true);
       	    
-      	 	add(txtN1);
-      	 	txtN1.setBounds(900,335,140,20);
+      	 	add(LTotalcost);
+      	 	LTotalcost.setBounds(900,600,140,20);
       	    
       	 	add(Cash);
-      	 	Cash.setBounds(820,360,80,20);
+      	 	Cash.setBounds(820,625,80,20);
       	 	Cash.setBackground(Color.black);
       	 	Cash.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	Cash.setForeground(Color.white);
-      	    Cash.setOpaque(true);
+            Cash.setOpaque(true);
       	    
-      	 	add(txtN2);
-      	 	txtN2.setBounds(900,360,140,20);
+      	 	add(LCash);
+      	 	LCash.setBounds(900,625,140,20);
       	    
-      	 	add(Change_);
-      	 	Change_.setBounds(820,385,80,20);
-      	 	Change_.setBackground(Color.black);
-      	 	Change_.setFont(new Font("Serif", Font.PLAIN, 14));
-      	 	Change_.setForeground(Color.white);
-      	    Change_.setOpaque(true);
+      	 /*	add(TWarning);
+      	 	TWarning.setBounds(820,385,80,20);
+      	 	TWarning.setBackground(Color.black);
+      	 	TWarning.setFont(new Font("Serif", Font.PLAIN, 14));
+      	 	TWarning.setForeground(Color.white);
+            TWarning.setOpaque(true);
       	    
-      	 	add(txtR);
-      	 	txtR.setBounds(900,385,140,20);
+      	 	add(LWarn);
+      	 	LWarn.setBounds(900,385,140,20);*/
+      	 	
+      	 	
       	 	
       	 /*	add(RStatus);
       	 	RStatus.setBounds(890,360,130,20);*/
       	 	
       	 	add(bPay);
-      	 	bPay.setBounds(820,410,70, 30);
+      	 	bPay.setBounds(820,660,70, 30);
       	 	
       	 	add(bClear);
-      	 	bClear.setBounds(895,410,70,30);
+      	 	bClear.setBounds(895,660,70,30);
       	 	
       	 	add(bNewC);
-      	 	bNewC.setBounds(970,410,70,30);
+      	 	bNewC.setBounds(970,660,70,30);
       	 	
+      	 	add(RBooking);
+      	 	RBooking.setBounds(870,468,160,20);
+      	 	RBooking.setBackground(Color.black);
+      	 	RBooking.setFont(new Font("Serif", Font.PLAIN, 18));
+      	 	RBooking.setForeground(Color.white);
+            RBooking.setOpaque(true);
+      	 	
+      	 	add(RTypeStudio);
+      	 	RTypeStudio.setBounds(685,462,100,50);
+      	 	RTypeStudio.setBackground(Color.black);
+      	 	RTypeStudio.setFont(new Font("Serif", Font.PLAIN, 14));
+      	 	RTypeStudio.setForeground(Color.white);
+            RTypeStudio.setOpaque(true);
+      	    
+      	 		
+      	 	add(Rm1);      	 	 
+        	Rm1.setBounds(307,462,70,37);
+      	 	Rm1.setBackground(Color.white);
+            add(lR1);      	 	 
+      	 	lR1.setBounds(307,498,70,20);
+            lR1.setBackground(Color.black);
+      	 	lR1.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR1.setForeground(Color.white);
+            lR1.setOpaque(true);
+      	 	
+      	 	add(Rm2);
+      	 	Rm2.setBounds(382,462,70,37);
+      	 	Rm2.setBackground(Color.white);
+            add(lR2);      	 	 
+      	 	lR2.setBounds(382,498,70,20);
+            lR2.setBackground(Color.black);
+      	 	lR2.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR2.setForeground(Color.white);
+            lR2.setOpaque(true);
+                
+      	 	add(Rm3);
+      	 	Rm3.setBounds(457,462,70,37);
+      	 	Rm3.setBackground(Color.white);
+            add(lR3);      	 	 
+      	 	lR3.setBounds(457,498,70,20);
+            lR3.setBackground(Color.black);
+      	 	lR3.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR3.setForeground(Color.white);
+            lR3.setOpaque(true);
+                
+      	 	add(Rm4);
+      	 	Rm4.setBounds(532,462,70,37);
+      	 	Rm4.setBackground(Color.white);
+            add(lR4);      	 	 
+      	 	lR4.setBounds(532,498,70,20);
+            lR4.setBackground(Color.black);
+      	 	lR4.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR4.setForeground(Color.white);
+            lR4.setOpaque(true);
+                
+            add(Rm5);
+      	 	Rm5.setBounds(607,462,70,37);
+      	 	Rm5.setBackground(Color.white);
+            add(lR5);      	 	 
+      	 	lR5.setBounds(607,498,70,20);
+            lR5.setBackground(Color.black);
+      	 	lR5.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR5.setForeground(Color.white);
+            lR5.setOpaque(true);
+                
+            add(RTypeDeLuxe);
+      	 	RTypeDeLuxe.setBounds(685,522,100,50);
+      	 	RTypeDeLuxe.setBackground(Color.black);
+      	 	RTypeDeLuxe.setFont(new Font("Serif", Font.PLAIN, 14));
+      	 	RTypeDeLuxe.setForeground(Color.white);
+            RTypeDeLuxe.setOpaque(true);
+             
+            add(Rm6);
+      	 	Rm6.setBounds(307,522,70,37);
+      	 	Rm6.setBackground(Color.white);
+            add(lR6);      	 	 
+      	 	lR6.setBounds(307,558,70,20);
+            lR6.setBackground(Color.black);
+      	 	lR6.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR6.setForeground(Color.white);
+            lR6.setOpaque(true);
+                
+      	 	add(Rm7);
+      	 	Rm7.setBounds(382,522,70,37);
+      	 	Rm7.setBackground(Color.white);
+                add(lR7);      	 	 
+      	 	lR7.setBounds(382,558,70,20);
+                lR7.setBackground(Color.black);
+      	 	lR7.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR7.setForeground(Color.white);
+                lR7.setOpaque(true);
+                
+      	 	add(Rm8);
+      	 	Rm8.setBounds(457,522,70,37);
+      	 	Rm8.setBackground(Color.white);
+                add(lR8);      	 	 
+      	 	lR8.setBounds(457,558,70,20);
+                lR8.setBackground(Color.black);
+      	 	lR8.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR8.setForeground(Color.white);
+                lR8.setOpaque(true);
+                
+      	 	add(Rm9);
+      	 	Rm9.setBounds(532,522,70,37);
+      	 	Rm9.setBackground(Color.white);
+            add(lR9);      	 	 
+      	 	lR9.setBounds(532,558,70,20);
+            lR9.setBackground(Color.black);
+      	 	lR9.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR9.setForeground(Color.white);
+                lR9.setOpaque(true);
+                
+      	 	add(Rm10);
+      	 	Rm10.setBounds(607,522,70,37);
+      	 	Rm10.setBackground(Color.white);
+                add(lR10);      	 	 
+      	 	lR10.setBounds(607,558,70,20);
+                lR10.setBackground(Color.black);
+      	 	lR10.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR10.setForeground(Color.white);
+                lR10.setOpaque(true);
+            
+            
+            add(RTypePremier);
+      	 	RTypePremier.setBounds(685,582,100,50);
+      	 	RTypePremier.setBackground(Color.black);
+      	 	RTypePremier.setFont(new Font("Serif", Font.PLAIN, 14));
+      	 	RTypePremier.setForeground(Color.white);
+            RTypePremier.setOpaque(true);
+                
+      	 	add(Rm11);
+      	 	Rm11.setBounds(307,582,70,37);
+      	 	Rm11.setBackground(Color.white);
+            add(lR11);      	 	 
+      	 	lR11.setBounds(307,618,70,20);
+            lR11.setBackground(Color.black);
+      	 	lR11.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR11.setForeground(Color.white);
+            lR11.setOpaque(true);
+                
+      	 	add(Rm12);
+      	 	Rm12.setBounds(382,582,70,37);
+      	 	Rm12.setBackground(Color.white);
+            add(lR12);      	 	 
+      	 	lR12.setBounds(382,618,70,20);
+            lR12.setBackground(Color.black);
+      	 	lR12.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR12.setForeground(Color.white);
+            lR12.setOpaque(true);
+                
+      	 	add(Rm13);
+      	 	Rm13.setBounds(457,582,70,37);
+      	 	Rm13.setBackground(Color.white);
+            add(lR13);      	 	 
+      	 	lR13.setBounds(457,618,70,20);
+            lR13.setBackground(Color.black);
+      	 	lR13.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR13.setForeground(Color.white);
+            lR13.setOpaque(true);
+                
+      	 	add(Rm14);
+      	 	Rm14.setBounds(532,582,70,37);
+      	 	Rm14.setBackground(Color.white);
+            add(lR14);      	 	 
+      	 	lR14.setBounds(532,618,70,20);
+            lR14.setBackground(Color.black);
+      	 	lR14.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR14.setForeground(Color.white);
+            lR14.setOpaque(true);
+                
+            add(Rm15);
+      	 	Rm15.setBounds(607,582,70,37);
+      	 	Rm15.setBackground(Color.white);
+            add(lR15);      	 	 
+      	 	lR15.setBounds(607,618,70,20);
+            lR15.setBackground(Color.black);
+      	 	lR15.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR15.setForeground(Color.white);
+            lR15.setOpaque(true);
+            
+            add(RTypeSuperior);
+      	 	RTypeSuperior.setBounds(685,642,100,50);
+      	 	RTypeSuperior.setBackground(Color.black);
+      	 	RTypeSuperior.setFont(new Font("Serif", Font.PLAIN, 14));
+      	 	RTypeSuperior.setForeground(Color.white);
+            RTypeSuperior.setOpaque(true);
+                
+            add(Rm16);
+      	 	Rm16.setBounds(307,642,70,37);
+      	 	Rm16.setBackground(Color.white);
+            add(lR16);      	 	 
+      	 	lR16.setBounds(307,678,70,20);
+            lR16.setBackground(Color.black);
+      	 	lR16.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR16.setForeground(Color.white);
+            lR16.setOpaque(true);
+                
+      	 	add(Rm17);
+      	 	Rm17.setBounds(382,642,70,37);
+      	 	Rm17.setBackground(Color.white);
+            add(lR17);      	 	 
+      	 	lR17.setBounds(382,678,70,20);
+            lR17.setBackground(Color.black);
+      	 	lR17.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR17.setForeground(Color.white);
+            lR17.setOpaque(true);
+                
+      	 	add(Rm18);
+      	 	Rm18.setBounds(457,642,70,37);
+      	 	Rm18.setBackground(Color.white);
+            add(lR18);      	 	 
+      	 	lR18.setBounds(457,678,70,20);
+            lR18.setBackground(Color.black);
+      	 	lR18.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR18.setForeground(Color.white);
+            lR18.setOpaque(true);
+                
+      	 	add(Rm19);
+      	 	Rm19.setBounds(532,642,70,37);
+      	 	Rm19.setBackground(Color.white);
+            add(lR19);      	 	 
+      	 	lR19.setBounds(532,678,70,20);
+            lR19.setBackground(Color.black);
+      	 	lR19.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR19.setForeground(Color.white);
+            lR19.setOpaque(true);
+                
+      	 	add(Rm20);
+      	 	Rm20.setBounds(607,642,70,37);
+      	 	Rm20.setBackground(Color.white);
+            add(lR20);      	 	 
+      	 	lR20.setBounds(607,678,70,20);
+            lR20.setBackground(Color.black);
+      	 	lR20.setFont(new Font("Serif", Font.PLAIN, 12));
+      	 	lR20.setForeground(Color.white);
+            lR20.setOpaque(true);
+                
       	 	add(lblBG);
       	 	lblBG.setBounds(0,0,1366,710);
       	 	
-      	 	add(Rm1);      	 	 
-      	 	Rm1.setBounds(307,520,70,37);
-      	 	Rm1.setBackground(Color.white);
-      	 	add(Rm2);
-      	 	Rm2.setBounds(382,520,70,37);
-      	 	Rm2.setBackground(Color.white);
-      	 	add(Rm3);
-      	 	Rm3.setBounds(457,520,70,37);
-      	 	Rm3.setBackground(Color.white);
-      	 	add(Rm4);
-      	 	Rm4.setBounds(532,520,70,37);
-      	 	Rm4.setBackground(Color.white);
-      	 	
-      	    add(Rm5);
-      	 	Rm5.setBounds(307,562,70,37);
-      	 	Rm5.setBackground(Color.white);
-      	    add(Rm6);
-      	 	Rm6.setBounds(382,562,70,37);
-      	 	Rm6.setBackground(Color.white);
-      	 	add(Rm7);
-      	 	Rm7.setBounds(759,520,70,37);
-      	 	Rm7.setBackground(Color.white);
-      	 	
-      	 	
-      	 	add(Rm8);
-      	 	Rm8.setBounds(834,520,70,37);
-      	 	Rm8.setBackground(Color.white);
-      	 	
-      	 	add(Rm9);
-      	 	Rm9.setBounds(609,520,70,37);
-      	 	Rm9.setBackground(Color.white);
-      	 	add(Rm10);
-      	 	Rm10.setBounds(684,520,70,37);
-      	 	Rm10.setBackground(Color.white);      	 	
-      	 	add(Rm11);
-      	 	Rm11.setBounds(457,562,70,37);
-      	 	Rm11.setBackground(Color.white);
-      	 	add(Rm12);
-      	 	
-      	 	Rm12.setBounds(532,562,70,37);
-      	 	Rm12.setBackground(Color.white);
-      	 	
-      	 	add(Rm13);
-      	 	Rm13.setBounds(609,562,70,37);
-      	 	Rm13.setBackground(Color.white);
-      	 	add(Rm14);
-      	 	Rm14.setBounds(684,562,70,37);
-      	 	Rm14.setBackground(Color.white);
-      	    add(Rm15);
-      	 	Rm15.setBounds(759,562,70,37);
-      	 	Rm15.setBackground(Color.white);
-      	    add(Rm16);
-      	 	Rm16.setBounds(834,562,70,37);
-      	 	Rm16.setBackground(Color.white);
-      	 	
-      	 	add(Rm17);
-      	 	Rm17.setBounds(911,520,70,37);
-      	 	Rm17.setBackground(Color.white);
-      	 	add(Rm18);
-      	 	Rm18.setBounds(986,520,70,37);
-      	 	Rm18.setBackground(Color.white);
-      	 	
-      	 	add(Rm19);
-      	 	Rm19.setBounds(911,562,70,37);
-      	 	Rm19.setBackground(Color.white);
-      	 	add(Rm20);
-      	 	Rm20.setBounds(986,562,70,37);
-      	 	Rm20.setBackground(Color.white);
-      	 	
       		add(lblx);
-<<<<<<< HEAD
+      		
        	    bPay.addActionListener(this);
       	    bClear.addActionListener(this);
       	    bNewC.addActionListener(this);
@@ -362,118 +576,44 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	    Rm19.addActionListener(this);
       	    Rm20.addActionListener(this);
       	    Reserve.addActionListener(this);
-
-=======
-       	    
-       	    
-       	    bAdd.addActionListener(this);
-      	    bClear.addActionListener(this);
-      	    //ImageIcon Change
-      	    Rm1.addActionListener(this);
-      		Rm2.addActionListener(this);
-      		Rm3.addActionListener(this);
-      		Rm4.addActionListener(this);
-      		Rm5.addActionListener(this);
-      		Rm6.addActionListener(this);
-      		Rm7.addActionListener(this);
-      		Rm8.addActionListener(this);
-      		Rm9.addActionListener(this);
-      		Rm10.addActionListener(this);
-      		Rm11.addActionListener(this);
-      		Rm12.addActionListener(this);
-      		Rm13.addActionListener(this);
-      		Rm14.addActionListener(this);
-      		Rm15.addActionListener(this);
-      		Rm16.addActionListener(this);
-      		Rm17.addActionListener(this);
-      		Rm18.addActionListener(this);
-      		Rm19.addActionListener(this);
-      		Rm20.addActionListener(this);
-      		//RPreview.addActionListener(this);
->>>>>>> 19728ff780cce2d04a8268fc814f732f6279b7ba
+      	    RCancel.addActionListener(this);
+      	    
       	}//end of contructor
-    //Event Handlers
-    public void actionPerformed (ActionEvent e){
-    	
-<<<<<<< HEAD
+      	
+	private class Transactions {
+	        // This class can access everything from its parent...
+	      public void Reserve_(int RmNum,String RmName,Double RmCost,Boolean RmStatus ){ //RoomNum,RoomName,RoomCost,RoomStatus
+	      		RInfo += RoomName+" P"+RmCost+"\n";
+	      		Binfo.setText(RInfo);
+	      		RTotal += RmCost;
+	     		LTotalcost.setText(Double.toString(RTotal));
+	     		
+	     		RoomStatus = true;
+	     		LStatus.setText("Room Status:\n    RESERVED");
+	     		
+	      }
+	      public void Cancel_(int RmNum,String RmName,Double RmCost,Boolean RmStatus){
+	      		RInfo = "";
+	      		Binfo.setText("You choose to cancel your selected Rooms\n\nPlease choose again... ");
+	      		RTotal = 0.00;
+	      		RoomStatus = true;
+	     		LTotalcost.setText(Double.toString(RTotal));
+	     		
+	      }
+	}
+      //Event Handlers
+      @Override
+      public void actionPerformed (ActionEvent e){
+      	Transactions Txns = new Transactions();
     	   if (e.getSource() == bPay){
     	   		int Csh,Ttl,minus;
-=======
-    	
-    	//Changing the ImageIcon when Button is Press
-	    	if (e.getSource() == Rm1) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 + "Rm1.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm2) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 + "Rm2.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm3) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm3.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm4) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm4.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm5) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm5.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm6) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 + "Rm6.jpg"));	
-	    	}		
-	    	else if (e.getSource() == Rm7) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm7.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm8) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm8.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm9) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm9.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm10) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm10.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm11) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm11.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm12) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm12.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm13) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm13.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm14) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm14.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm15) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm15.jpg"));	
-	    	}else if (e.getSource() == Rm16) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm16.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm17) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm17.jpg"));	
-	    	}			
-	    	else if (e.getSource() == Rm18) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm18.jpg"));	
-	    	}
-	    	else if (e.getSource() == Rm19) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 +"Rm19.jpg"));	
-	    	}	
-	    	else if (e.getSource() == Rm20) {
-	    	RPreview.setIcon(new ImageIcon(imgLink1 + "Rm20.jpg"));	
-	    	}
-	          	
-		    
-		    	
-    	   if (e.getSource() == bAdd){
-    	   		int a,b,sum;
->>>>>>> 19728ff780cce2d04a8268fc814f732f6279b7ba
-    	   		
-    	   		Csh = Integer.parseInt(txtN1.getText());
-    	   		Ttl = Integer.parseInt(txtN2.getText());
+    	   		Csh = Integer.parseInt(LTotalcost.getText());
+    	   		Ttl = Integer.parseInt(LCash.getText());
     	   		if(Csh<Ttl){
-    	   			txtR.setText("Please enter exact cassh amount");
+    	   			LWarn.setText("Please enter exact cash amount");
     	   		}else{
     	   		minus= Csh - Ttl;
-    	   		txtR.setText(Integer.toString(minus));
+    	   		LWarn.setText(Integer.toString(minus));
     	   		}
     	   	}//end of bPay event
     	   	
@@ -482,220 +622,233 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
 		  	 	txtchkOut.setText("");
 		  	 	txtName.setText("");
 		  	 	txtPhone.setText("");
-    	   		txtN1.setText("");
-    	   		txtN2.setText("");
-    	   		txtR.setText("");
-<<<<<<< HEAD
+    	   		LTotalcost.setText("");
+    	   		LCash.setText("");
+    	   		LWarn.setText("");
     	   	}	
     	   if(e.getSource()== bNewC){
-    	   	
+    	   	Reserve.setEnabled(false);
     	   }
     	   
-    	   int RoomNum = 0;
-    	   String RoomName = "";
-    	   Double RoomCost = 0.00;
-    	   
+    	   if(e.getSource()== Reserve){
+	    	   YouBooked.setText("You booked the following rooms:...");
+	    	   Txns.Reserve_(RoomNum,RoomName,RoomCost,RoomStatus);
+    	   }
+    	   if(e.getSource()== RCancel){
+    	   		YouBooked.setText("Opppsssss...");
+               Txns.Cancel_(RoomNum,RoomName,RoomCost,RoomStatus);
+    	   }
     	   
     	   if(e.getSource()== Rm1){
-    	   	RoomNum = 1;
+	   		RoomNum = 1;
     	   	RoomName = "Room 1: Regular Room";
     	   	RoomCost = 1000.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm1.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm1.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP1000.00 per night");
+      	 	RRate.setText("Room Rate:\nP1000.00 per night");
+      	 	LStatus.setText("Vacant");
             RPreview.setIcon(PPreview);
-            	
+            Reserve.setEnabled(true);
       	   }
       	 
       	   if(e.getSource()== Rm2){
       	   	RoomNum = 2;
       	   	RoomName = "Room 2: Regular Room";
     	   	RoomCost = 1040.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm2.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm2.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Room 2");
-      	 	RRate.setText("Room Rate:\n\nP1040.00 per night");
+      	 	RRate.setText("Room Rate:\nP1040.00 per night");
+      	 	LStatus.setText("Vacant");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm3){
       	   	RoomNum = 3;
       	   	RoomName = "Room 3: Regular Room";
     	   	RoomCost = 4000.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm3.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm3.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Room 3");
-      	 	RRate.setText("Room Rate:\n\nP4000.00 per night");
+      	 	RRate.setText("Room Rate:\nP4000.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm4){
       	   	RoomNum = 3;
       	   	RoomName = "Room 4: Regular Room";
     	   	RoomCost = 1050.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm4.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm4.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Room 4");
-      	 	RRate.setText("Room Rate:\n\nP1050.00 per night");
+      	 	RRate.setText("Room Rate:\nP1050.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm5){
       	   	RoomNum = 5;
       	   	RoomName = "Room 5: Regular Room";
     	   	RoomCost = 6000.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm5.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm5.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Hello Room 5");
-      	 	RRate.setText("Room Rate:\n\nP6000.00 per night");
+      	 	RRate.setText("Room Rate:\nP6000.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm6){
       	   	RoomNum = 6;
       	   	RoomName = "Room 6: Regular Room";
     	   	RoomCost = 2000.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm6.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm6.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Room 6");
-      	 	RRate.setText("Room Rate:\n\nP2000.00 per night");
+      	 	RRate.setText("Room Rate:\nP2000.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm7){
       	   	RoomNum = 7;
       	   	RoomName = "Room 7: Regular Room";
     	   	RoomCost = 1070.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm7.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm7.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP1070.00 per night");
+      	 	RRate.setText("Room Rate:\nP1070.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm8){
       	   	RoomNum = 8;
       	   	RoomName = "Room 8: Regular Room";
     	   	RoomCost = 1006.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm8.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm8.jpg");
     	   	RDetail1.setText("Room Amenities:\n* 42\" Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP1006.00 per night");
+      	 	RRate.setText("Room Rate:\nP1006.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm9){
       	   	RoomNum = 9;
       	   	RoomName = "Room 8: VIP Room";
     	   	RoomCost = 1050.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm9.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm9.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP1050.00 per night");
+      	 	RRate.setText("Room Rate:\nP1050.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm10){
       	   	RoomNum = 10;
       	   	RoomName = "Room 10: VIP Room";
     	   	RoomCost = 1500.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm10.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm10.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP1500.00 per night");
+      	 	RRate.setText("Room Rate:\nP1500.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm11){
       	   	RoomNum = 11;
       	   	RoomName = "Room 11: VIP Room";
     	   	RoomCost = 3000.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm11.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm11.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV's\n* Unlimited Wifi\n* Comfortable Bed\n");
-      	 	RRate.setText("Room Rate:\n\nP3000.00 per night");
+      	 	RRate.setText("Room Rate:\nP3000.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm12){
       	   	RoomNum = 12;
       	   	RoomName = "Room 8: VIP Room";
     	   	RoomCost = 1006.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm12.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm12.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP1400.00 per night");
+      	 	RRate.setText("Room Rate:\nP1400.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm13){
       	   	RoomNum = 13;
       	   	RoomName = "Room 13: VIP Room";
     	   	RoomCost = 500.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm13.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm13.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP500.00 per night");
+      	 	RRate.setText("Room Rate:\nP500.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm14){
       	   	RoomNum = 14;
       	   	RoomName = "Room 8: VIP Room";
     	   	RoomCost = 5000.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm14.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm14.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP5000.00 per night");
+      	 	RRate.setText("Room Rate:\nP5000.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm15){
       	   	RoomNum = 15;
       	   	RoomName = "Room 15: VIP Room";
     	   	RoomCost = 1400.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm15.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm15.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 12 Cable TV\n * Comfortable Bed\n*BathRoom and sink\n* Unlimited Wifi\n");
-      	 	RRate.setText("Room Rate:\n\nP1400.00 per night");
+      	 	RRate.setText("Room Rate:\nP1400.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm16){
       	   	RoomNum = 16;
       	   	RoomName = "Room 16: VIP Room";
     	   	RoomCost = 400.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm16.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm16.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n");
-      	 	RRate.setText("Room Rate:\n\nP400.00 per night");
+      	 	RRate.setText("Room Rate:\nP400.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm17){
       	   	RoomNum = 17;
       	   	RoomName = "Room 17: VIP Room";
     	   	RoomCost = 400.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm17.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm17.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP400.00 per night");
+      	 	RRate.setText("Room Rate:\nP400.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm18){
       	   	RoomNum = 18;
       	   	RoomName = "Room 18: VIP Room";
     	   	RoomCost = 100.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm18.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm18.jpg");
     	   	RDetail1.setText("Room Amenities:\n*  Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP100.00 per night");
+      	 	RRate.setText("Room Rate:\nP100.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm19){
       	   	RoomNum = 19;
       	   	RoomName = "Room 19: VIP Room";
     	   	RoomCost = 10.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm19.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm19.jpg");
     	   	RDetail1.setText("Room Amenities:\n*  Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP10.00 per night");
+      	 	RRate.setText("Room Rate:\nP10.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
       	   if(e.getSource()== Rm20){
       	   	RoomNum = 20;
       	   	RoomName = "Room 20: VIP Room";
     	   	RoomCost = 23000.00;
-    	   	Icon PPreview = new ImageIcon("D:/Documents/HotelRoomReservation/img/Rm20.jpg");
+    	   	Icon PPreview = new ImageIcon(imgLink + "Rm20.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\n\nP23000.00 per night");
+      	 	RRate.setText("Room Rate:\nP23000.00 per night");
             RPreview.setIcon(PPreview);
+            Reserve.setEnabled(true);
       	   }
     	   
     	}//end of Event Handler  	
-=======
-    	   		txtchkIN.setText("");
-    	   		txtchkOut.setText("");
-    	   		txtName.setText("");
-    	   		txtPhone.setText("");
-    	   		
-    	   	}//end of Event Handler
-    	 		
-    	}
-    	  	
->>>>>>> 19728ff780cce2d04a8268fc814f732f6279b7ba
       
-    public static void main(String[] args) {
-			HotelRoomReservation  BG = new HotelRoomReservation();
-			BG.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
+    	public static void main(String[] args) {
+		HotelRoomReservation  BG = new HotelRoomReservation();
+		BG.Reserve.setEnabled(false);
+		BG.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    }
 }
-
 
