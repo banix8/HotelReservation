@@ -12,28 +12,32 @@ import javax.swing.ImageIcon;
 public class HotelRoomReservation extends JFrame implements ActionListener {
       
       	   //declaring Components
-      	   JLabel RPreview, RBooking,Totalcost, Cash, TWarning, lblx, lblBG,lchkIN,lchkOut,lName,lPhone,YouBooked;
+      	   JLabel RPreview, RPreviewOverlay, RBooking,Totalcost, Cash, TWarning, lblx, lblBG,lchkIN,lchkOut,lName,lPhone,YouBooked,lblAvlRoom,lblCustNum;
            JTextArea RTypeStudio,RTypeDeLuxe,RTypePremier,RTypeSuperior; 
            JLabel lR1,lR2,lR3,lR4,lR5,lR6,lR7,lR8,lR9,lR10,lR11,lR12,lR13,lR14,lR15,lR16,lR17,lR18,lR19,lR20;
-      	   JButton bPay, bClear, bNewC, Reserve,RCancel;
+      	   JButton bPay, bClear, bNewC, Reserve,RCancel,CheckOutbtn;
            JButton Rm1,Rm2,Rm3,Rm4,Rm5,Rm6,Rm7,Rm8,Rm9,Rm10,Rm11,Rm12,Rm13,Rm14,Rm15,Rm16,Rm17,Rm18,Rm19,Rm20;
       	   JTextField LTotalcost, LCash, LWarn, RStatus, txtchkIN,txtchkOut,txtName,txtPhone;
       	   JTextArea RDetail1, RRate, Binfo, LStatus, OReminders;
       	   String imgLink = "D:/Documents/HotelRoomReservation/img/";
       	   String previewImg = imgLink + "Preview.jpg";
+      	   String previewOverlayImg = imgLink + "Overlay.png";
       	   ImageIcon pic1 = new ImageIcon(imgLink + "bg4.jpg");
       	   Image image1 = pic1.getImage();
       	   Image scaled1 = image1.getScaledInstance(1366,710,java.awt.Image.SCALE_SMOOTH);
       	   ImageIcon bg1 = new ImageIcon(scaled1);
-           int RoomNum,avlRooms = 20;
-           Boolean RoomStatus = false;
+           int RoomNum,avlRooms = 20,count = 1,CustCount=1;
     	   String RoomName,RInfo="",RoomState = "";
     	   Double RoomCost = 0.00;
-    	   Double RTotal = 0.00;
-    	   
+    	   Double RTotal = 0.00;  
+      	   int[] rmList = new int[21];
+      	   String[] rmReserved = new String[21];
+	   	   Double[] rmReservedCost = new Double[21];
+	   	   String[] bking_list = new String[21];
       	   
            Icon logo = new ImageIcon(imgLink + "logo.png");
       	   Icon PPreview = new ImageIcon(previewImg);
+      	//   Icon PPreviewOverlay = new ImageIcon(previewOverlayImg);
 
            Icon Rm01 = new ImageIcon(imgLink + "Rmx_1.jpg");
       	   Icon Rm02 = new ImageIcon(imgLink + "Rmx_2.jpg");
@@ -56,7 +60,7 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	   Icon Rm019 = new ImageIcon(imgLink + "Rmx_19.jpg");
       	   Icon Rm020 = new ImageIcon(imgLink + "Rmx_20.jpg");
    	 
-      public HotelRoomReservation() {
+   public HotelRoomReservation() {
       	 	
       	 	///Contruction/Instantiate
        	 	setSize(1366,750);
@@ -70,7 +74,10 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	 	Container C = getContentPane();
       	 	C.setBackground(new Color(226,226,226));
       	 	
+      	 	lblAvlRoom = new JLabel("Available Rooms = "+avlRooms);
+      	 	lblCustNum = new JLabel("Customer #: "+CustCount);
       	 	RPreview = new JLabel(PPreview);
+      	 	RPreviewOverlay = new JLabel();
        	 	RDetail1 = new JTextArea("Hotel Amenities:\n* Comfortable & Luxuries Rooms\n* Air Condition with 42 Cable TV\n* 24/7 Active Security\n* Clean BathRoom & Sink");
        	 	RDetail1.setEditable(false);
       	 	RRate = new JTextArea("Room Rates:\nP500.00 to P5000.00");
@@ -79,13 +86,14 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	 	LStatus.setEditable(false);
       	 	
       	 	Reserve = new JButton("Reserve");
-      	 	RCancel = new JButton("Cancel");
+      	 	RCancel = new JButton("Unreserve");
       	 	
       	 	YouBooked = new JLabel("Choose now your favorite room/s...");
       	 	Binfo = new JTextArea();
       	 	Binfo.setEditable(false);
       	 	OReminders = new JTextArea("How to Book a room:\n* Click the room you liked below.\n* Click Reserve to reserve.\n* Click Cancel to cancel.\n* Please fill your details below.\n* We only accept exact amount");
       	 	OReminders.setEditable(false);
+      	 	CheckOutbtn = new JButton("Checkout");
       	 	
       	 	RBooking = new JLabel("Booking Form");
       	 	Totalcost = new JLabel("Total Cost");
@@ -152,7 +160,7 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
             lR20= new JLabel("Rm: 20");
                 
       	 	Rm1 = new JButton(Rm01);
-      	 		Rm1.setToolTipText("Room 1: Amenities = \n Gtlkdf");
+      	 	//Rm1.setToolTipText("Room 1: Amenities = \n Gtlkdf");
       	 	Rm2 = new JButton(Rm02);
       	 	Rm3 = new JButton(Rm03);
       	 	Rm4 = new JButton(Rm04);
@@ -175,23 +183,27 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	 	
       	 	//Placing Component on the Frame
       	 	
+     	 	
+     	 	add(RPreviewOverlay);
+      	 	RPreviewOverlay.setBounds(312,96,484,254);
+      	 	
       	 	add(RPreview);
       	 	RPreview.setBounds(312,96,484,254);
       	 	
       	 	add(RDetail1);
-      	 	RDetail1.setBounds(314,358,200,88);
+      	 	RDetail1.setBounds(314,358,180,88);
       	 	RDetail1.setBackground(Color.black);
       	 	RDetail1.setFont(new Font("Serif", Font.PLAIN, 12));
       	 	RDetail1.setForeground(Color.white);
                 
-      	 	add(LStatus);
-      	 	LStatus.setBounds(514,358,140,44);
+      	  	add(LStatus);
+      	 	LStatus.setBounds(514,358,150,44);
       	 	LStatus.setBackground(Color.black);
       	 	LStatus.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	LStatus.setForeground(Color.white);
                 
       	 	add(RRate);
-      	 	RRate.setBounds(514,402,140,44);
+      	 	RRate.setBounds(514,402,150,44);
       	 	RRate.setBackground(Color.black);
       	 	RRate.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	RRate.setForeground(Color.white);
@@ -202,6 +214,20 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	 	add(RCancel);
       	 	RCancel.setBounds(685,405,100,30);
       	 	
+      	 	add(lblCustNum);
+      	 	lblCustNum.setBounds(760,20,180,30);
+      	 //	lblCustNum.setBackground(Color.black);
+      	 	lblCustNum.setFont(new Font("Serif", Font.PLAIN, 20));
+      	 	lblCustNum.setForeground(Color.white);
+           //lblCustNum.setOpaque(true);
+         
+      	 	add(lblAvlRoom);
+      	 	lblAvlRoom.setBounds(760,50,180,30);
+      	 //	lblAvlRoom.setBackground(Color.black);
+      	 	lblAvlRoom.setFont(new Font("Serif", Font.PLAIN, 20));
+      	 	lblAvlRoom.setForeground(Color.white);
+         //   lblAvlRoom.setOpaque(true);
+      	 	
       	 	add(YouBooked);
       	 	YouBooked.setBounds(820,100,220,20);
       	 	YouBooked.setBackground(Color.black);
@@ -209,17 +235,20 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	 	YouBooked.setForeground(Color.white);
 
       	 	add(Binfo);
-      	 	Binfo.setBounds(820,120,220,180);
+      	 	Binfo.setBounds(820,120,220,175);
       	 	Binfo.setBackground(Color.black);
       	 	Binfo.setFont(new Font("Serif", Font.PLAIN, 12));
       	 	Binfo.setForeground(Color.white);
       	 	
       	 	add(OReminders);
-      	 	OReminders.setBounds(820,305,220,130);
+      	 	OReminders.setBounds(820,295,220,130);
       	 	OReminders.setBackground(Color.black);
       	 	OReminders.setFont(new Font("Serif", Font.PLAIN, 14));
       	 	OReminders.setForeground(Color.white);
             OReminders.setOpaque(true);
+            
+            add(CheckOutbtn);
+            CheckOutbtn.setBounds(820,410,220,30);
       	    
       	 	add(txtchkIN);
       	 	txtchkIN.setBounds(900,500,140,20);
@@ -579,275 +608,389 @@ public class HotelRoomReservation extends JFrame implements ActionListener {
       	    RCancel.addActionListener(this);
       	    
       	}//end of contructor
-      	
-	private class Transactions {
+   void RstPaymentEntry(){
+   	String Rst = JOptionPane.showInputDialog("Are you sure you want to reset your booking? y = Yes / n = No");
+   		if(Rst.equals("y")){
+   			txtchkIN.setText("");
+	  	 	txtchkOut.setText("");
+	  	 	txtName.setText("");
+	  	 	txtPhone.setText("");
+	   		LTotalcost.setText("0.00");
+	   		LCash.setText("0.00");
+	   		LWarn.setText("");
+   		}
+   }
+   void NewCustomer(){
+   	
+   /*	String Rst = JOptionPane.showInputDialog("Are you sure you want to cater new customer? y = Yes / n = No");
+   		if(Rst.equals("y")){
+   			Reserve.setEnabled(false);
+   			txtchkIN.setText("");
+	  	 	txtchkOut.setText("");
+	  	 	txtName.setText("");
+	  	 	txtPhone.setText("");
+	   		LTotalcost.setText("0.00");
+	   		LCash.setText("0.00");
+	   		LWarn.setText("");
+	   		RInfo = "";
+	   		RTotal =0.00;
+   		}
+	      	*/	
+	}
+   
+   void payNow(int t,int c,int x){
+  	
+   		if(x==0){
+   			JOptionPane.showMessageDialog(null,"You Paid: "+ c);
+	   		
+   		}else if(c<t){
+   			JOptionPane.showMessageDialog(null,"Please pay exatly "+t);
+   		}else{
+   			JOptionPane.showMessageDialog(null,"Please pay exact amount");
+   		}
+   	 }
+   void rmStatusNotifaction(int Rnum){
+  
+   	if(rmList[Rnum]==1){
+   		Icon PPreviewOverlay = new ImageIcon(imgLink + "Overlay.png");
+	    RPreviewOverlay.setIcon(PPreviewOverlay);
+    	LStatus.setText("Room already Reserved\nPlease choose another");
+    	
+    	
+    }
+    if(rmList[Rnum]==0){
+    	Icon PPreviewOverlay = new ImageIcon();
+	    RPreviewOverlay.setIcon(PPreviewOverlay);
+    	LStatus.setText("Room Status:\n    AVAILABLE");
+    }
+    
+    
+   }
+   private class Transactions {
 	        // This class can access everything from its parent...
-	      public void Reserve_(int RmNum,String RmName,Double RmCost,Boolean RmStatus ){ //RoomNum,RoomName,RoomCost,RoomStatus
-	      		RInfo += RoomName+" P"+RmCost+"\n";
-	      		Binfo.setText(RInfo);
-	      		RTotal += RmCost;
-	     		LTotalcost.setText(Double.toString(RTotal));
-	     		
-	     		RoomStatus = true;
-	     		LStatus.setText("Room Status:\n    RESERVED");
+	      public void Reserve_(int RmNum,String RmName,Double RmCost){ //RoomNum,RoomName,RoomCost
+	      		if(rmList[RoomNum]==0){
+      				Icon PPreviewOverlay = new ImageIcon(imgLink + "Overlay.png");
+	    			RPreviewOverlay.setIcon(PPreviewOverlay);
+	      	  		RInfo += RoomName+" P"+RmCost+"\n";
+	      	  		String rInfo_ = RoomName+" P"+RmCost+"\n";
+		      		rmReserved[RoomNum]= rInfo_;
+		       		Binfo.setText(RInfo);
+		      		RTotal += RmCost;
+		      		rmReservedCost[RoomNum]= RmCost;
+		     		LTotalcost.setText(Double.toString(RTotal));
+		     		avlRooms -= 1;
+		     		lblAvlRoom.setText("Available Rooms = "+avlRooms);
+		     		LStatus.setText("Room Status:\n    RESERVED");
+		     		rmList[RoomNum]=1;
+		     		count+=1;
+	      		}else{
+	      			LStatus.setText("Room already Reserved\nPlease choose another");
+	      		}
 	     		
 	      }
-	      public void Cancel_(int RmNum,String RmName,Double RmCost,Boolean RmStatus){
-	      		RInfo = "";
-	      		Binfo.setText("You choose to cancel your selected Rooms\n\nPlease choose again... ");
-	      		RTotal = 0.00;
-	      		RoomStatus = true;
-	     		LTotalcost.setText(Double.toString(RTotal));
-	     		
+	      public void UnReserve_(int RmNum,String RmName,Double RmCost){
+		      	if(rmList[RoomNum]==1){
+		      		
+		      		rmReserved[RoomNum] = "";
+		      		RInfo ="";
+		      		Icon PPreviewOverlay = new ImageIcon();
+	   				RPreviewOverlay.setIcon(PPreviewOverlay);
+	   				String _info ="";
+	   				
+	   				int z = 1;
+	   				while(z<20){
+	     				while(rmList[z]==1){
+   						_info += rmReserved[z];
+	      			//	rmReserved[z]= RInfo;
+	      				break;
+	   					}
+	   					z++;
+	   				}
+	   				RInfo = _info;
+	   				Binfo.setText(RInfo);
+			       rmList[RoomNum]=0;
+		      		Double minus=rmReservedCost[RoomNum];
+		      		RTotal -= minus;
+		     		LTotalcost.setText(Double.toString(RTotal));
+		     		avlRooms += 1;
+		     		lblAvlRoom.setText("Available Rooms = "+avlRooms);
+			     	LStatus.setText("Room Status:\n    AVAILABLE");
+		     		
+		      	}else{
+		      		LStatus.setText("You cannot unreserve a\nroomyou did not reserve!");
+		      	}
 	      }
 	}
       //Event Handlers
       @Override
-      public void actionPerformed (ActionEvent e){
+   public void actionPerformed (ActionEvent e){
       	Transactions Txns = new Transactions();
+        
     	   if (e.getSource() == bPay){
     	   		int Csh,Ttl,minus;
     	   		Csh = Integer.parseInt(LTotalcost.getText());
     	   		Ttl = Integer.parseInt(LCash.getText());
-    	   		if(Csh<Ttl){
-    	   			LWarn.setText("Please enter exact cash amount");
-    	   		}else{
-    	   		minus= Csh - Ttl;
-    	   		LWarn.setText(Integer.toString(minus));
-    	   		}
+    	   		minus = Csh - Ttl;
+    	   		payNow(Ttl,Csh,minus);
+
     	   	}//end of bPay event
     	   	
     	   if (e.getSource()== bClear){
-    	   	    txtchkIN.setText("");
-		  	 	txtchkOut.setText("");
-		  	 	txtName.setText("");
-		  	 	txtPhone.setText("");
-    	   		LTotalcost.setText("");
-    	   		LCash.setText("");
-    	   		LWarn.setText("");
+    	   		RstPaymentEntry();
     	   	}	
     	   if(e.getSource()== bNewC){
-    	   	Reserve.setEnabled(false);
+    	   	CustCount +=1;
+    	   	lblCustNum.setText("Customer #: "+CustCount);
+    	   	NewCustomer();
     	   }
     	   
     	   if(e.getSource()== Reserve){
-	    	   YouBooked.setText("You booked the following rooms:...");
-	    	   Txns.Reserve_(RoomNum,RoomName,RoomCost,RoomStatus);
+	    	   YouBooked.setText("You booked the following rooms:...\n");
+	    	   Txns.Reserve_(RoomNum,RoomName,RoomCost);
+	    	   
     	   }
     	   if(e.getSource()== RCancel){
-    	   		YouBooked.setText("Opppsssss...");
-               Txns.Cancel_(RoomNum,RoomName,RoomCost,RoomStatus);
+    	   	//	YouBooked.setText("Opppsssss...");
+               Txns.UnReserve_(RoomNum,RoomName,RoomCost);
+             
     	   }
     	   
     	   if(e.getSource()== Rm1){
 	   		RoomNum = 1;
-    	   	RoomName = "Room 1: Regular Room";
-    	   	RoomCost = 1000.00;
+    	   	RoomName = "Studio Room 1:";
+    	   	RoomCost = 600.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm1.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP1000.00 per night");
-      	 	LStatus.setText("Vacant");
+    	   	RDetail1.setText("Room Amenities:\n* Air Condition\n* Comfortable Bed for two\n*BathRoom and sink\n* w/ Internet and Electric fan");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
+      	 	//LStatus.setText("Vacant");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
+            
       	   }
       	 
       	   if(e.getSource()== Rm2){
       	   	RoomNum = 2;
-      	   	RoomName = "Room 2: Regular Room";
-    	   	RoomCost = 1040.00;
+      	   	RoomName = "Studio Room 2:";
+    	   	RoomCost = 500.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm2.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Room 2");
-      	 	RRate.setText("Room Rate:\nP1040.00 per night");
-      	 	LStatus.setText("Vacant");
+    	   	RDetail1.setText("Room Amenities:\n* Air Condition\n* Comfortable Bed for one\n* With T.V.\n* w/ Internet and Electric fan");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
+      	 	//LStatus.setText("Vacant");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+			rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm3){
       	   	RoomNum = 3;
-      	   	RoomName = "Room 3: Regular Room";
-    	   	RoomCost = 4000.00;
+      	   	RoomName = "Studio Room 3:";
+    	   	RoomCost = 550.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm3.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Room 3");
-      	 	RRate.setText("Room Rate:\nP4000.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Comfortable Bed for two\n* With T.V.\n* Clean and Quite area\n* w/ Internet and Electric fan");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm4){
-      	   	RoomNum = 3;
-      	   	RoomName = "Room 4: Regular Room";
-    	   	RoomCost = 1050.00;
+      	   	RoomNum = 4;
+      	   	RoomName = "Studio Room 4:";
+    	   	RoomCost = 500.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm4.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Room 4");
-      	 	RRate.setText("Room Rate:\nP1050.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* w/ Internet and Electric fan\n* Comfortable Bed for two\n* With T.V.\n* Simple and Clean");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm5){
       	   	RoomNum = 5;
-      	   	RoomName = "Room 5: Regular Room";
-    	   	RoomCost = 6000.00;
+      	   	RoomName = "Studio Room 5:";
+    	   	RoomCost = 500.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm5.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Hello Room 5");
-      	 	RRate.setText("Room Rate:\nP6000.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Comfortable Bed for two\n* With T.V.\n* w/ Internet and Electric fan");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm6){
       	   	RoomNum = 6;
-      	   	RoomName = "Room 6: Regular Room";
-    	   	RoomCost = 2000.00;
+      	   	RoomName = "DeLuxed Room 6:";
+    	   	RoomCost = 800.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm6.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Room 6");
-      	 	RRate.setText("Room Rate:\nP2000.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Comfortable Bed\n*  Closet , Telephone\n*BathRoom and sink");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+"per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm7){
       	   	RoomNum = 7;
-      	   	RoomName = "Room 7: Regular Room";
-    	   	RoomCost = 1070.00;
+      	   	RoomName = "DeLuxed Room 7:";
+    	   	RoomCost = 1300.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm7.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP1070.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Comfortable Bed with Sofa\n* You pay cheap but luxurius\n* Very Lovely Room");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm8){
       	   	RoomNum = 8;
-      	   	RoomName = "Room 8: Regular Room";
-    	   	RoomCost = 1006.00;
+      	   	RoomName = "DeLuxed Room 8:";
+    	   	RoomCost = 1550.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm8.jpg");
     	   	RDetail1.setText("Room Amenities:\n* 42\" Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP1006.00 per night");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm9){
       	   	RoomNum = 9;
-      	   	RoomName = "Room 8: VIP Room";
-    	   	RoomCost = 1050.00;
+      	   	RoomName = "DeLuxed Room 9:";
+    	   	RoomCost = 3000.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm9.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP1050.00 per night");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm10){
       	   	RoomNum = 10;
-      	   	RoomName = "Room 10: VIP Room";
-    	   	RoomCost = 1500.00;
+      	   	RoomName = "DeLuxed Room 10:";
+    	   	RoomCost = 4500.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm10.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP1500.00 per night");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm11){
       	   	RoomNum = 11;
-      	   	RoomName = "Room 11: VIP Room";
-    	   	RoomCost = 3000.00;
+      	   	RoomName = "Premier Room 11:";
+    	   	RoomCost = 4000.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm11.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV's\n* Unlimited Wifi\n* Comfortable Bed\n");
-      	 	RRate.setText("Room Rate:\nP3000.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Unlimited Wifi\n* Air Condition with 42 Cable TV's\n* Comfortable Bed Feels Like Home\n");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm12){
       	   	RoomNum = 12;
-      	   	RoomName = "Room 8: VIP Room";
-    	   	RoomCost = 1006.00;
+      	   	RoomName = "Premier Room 12:";
+    	   	RoomCost = 4000.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm12.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP1400.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Lovely Room for Small Family\n *Unlimited Wifi\n* Comfortable Bed\n* Spacious BathRoom and sink");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm13){
       	   	RoomNum = 13;
-      	   	RoomName = "Room 13: VIP Room";
-    	   	RoomCost = 500.00;
+      	   	RoomName = "Premier Room 13:";
+    	   	RoomCost = 3500.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm13.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP500.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Comfortable Bed For two\n*BathRoom and sink\n* Working table for Busy man\n* Feels like home");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm14){
       	   	RoomNum = 14;
-      	   	RoomName = "Room 8: VIP Room";
-    	   	RoomCost = 5000.00;
+      	   	RoomName = "Premier Room 14:";
+    	   	RoomCost = 4050.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm14.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Air Condition\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP5000.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Air Condition Room\n* Unlimited Wifi\n* Very Comfortable Bed for two\n* Clean BathRoom and sink");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm15){
       	   	RoomNum = 15;
-      	   	RoomName = "Room 15: VIP Room";
-    	   	RoomCost = 1400.00;
+      	   	RoomName = "Premier Room 15:";
+    	   	RoomCost = 4000.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm15.jpg");
     	   	RDetail1.setText("Room Amenities:\n* Air Condition with 12 Cable TV\n * Comfortable Bed\n*BathRoom and sink\n* Unlimited Wifi\n");
-      	 	RRate.setText("Room Rate:\nP1400.00 per night");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm16){
       	   	RoomNum = 16;
-      	   	RoomName = "Room 16: VIP Room";
-    	   	RoomCost = 400.00;
+      	   	RoomName = "Superior Room 16:";
+    	   	RoomCost = 4500.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm16.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n");
-      	 	RRate.setText("Room Rate:\nP400.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Very Elegant and Special\n* You can feel you are home.");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm17){
       	   	RoomNum = 17;
-      	   	RoomName = "Room 17: VIP Room";
-    	   	RoomCost = 400.00;
+      	   	RoomName = "Superior Room 17:";
+    	   	RoomCost = 5000.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm17.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP400.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Best we can Offer w/ 24/7 Security\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm18){
       	   	RoomNum = 18;
-      	   	RoomName = "Room 18: VIP Room";
-    	   	RoomCost = 100.00;
+      	   	RoomName = "Superior Room 18:";
+    	   	RoomCost = 6050.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm18.jpg");
-    	   	RDetail1.setText("Room Amenities:\n*  Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP100.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n*  Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Very Elegant and Special\n* You can feel you are home.");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm19){
       	   	RoomNum = 19;
-      	   	RoomName = "Room 19: VIP Room";
-    	   	RoomCost = 10.00;
+      	   	RoomName = "Superior Room 19:";
+    	   	RoomCost = 11000.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm19.jpg");
-    	   	RDetail1.setText("Room Amenities:\n*  Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP10.00 per night");
+    	   	RDetail1.setText("Room Amenities:\n* Very Elegant and Special\n* Unlimited Wifi\n* Air Condition with 42 Cable TV\n* Very Elegant and Special\n* You can feel you are home.");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
             RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
       	   if(e.getSource()== Rm20){
       	   	RoomNum = 20;
-      	   	RoomName = "Room 20: VIP Room";
-    	   	RoomCost = 23000.00;
+      	   	RoomName = "Superior Room 20:";
+    	   	RoomCost = 12000.00;
     	   	Icon PPreview = new ImageIcon(imgLink + "Rm20.jpg");
-    	   	RDetail1.setText("Room Amenities:\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
-      	 	RRate.setText("Room Rate:\nP23000.00 per night");
-            RPreview.setIcon(PPreview);
+    	   	RDetail1.setText("Room Amenities:\n* Very Elegant and Special\n* Air Condition with 42 Cable TV\n* Unlimited Wifi\n* Comfortable Bed\n*BathRoom and sink");
+      	 	RRate.setText("Room Rate:\nP"+RoomCost+" per night");
+      	 	RPreview.setIcon(PPreview);
             Reserve.setEnabled(true);
+            rmStatusNotifaction(RoomNum);
       	   }
+      	   
+ 
     	   
     	}//end of Event Handler  	
       
-    	public static void main(String[] args) {
+   public static void main(String[] args) {
 		HotelRoomReservation  BG = new HotelRoomReservation();
 		BG.Reserve.setEnabled(false);
+		BG.LTotalcost.setText("0.00");
+		BG.LCash.setText("0.00");
+		
 		BG.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    }
 }
